@@ -1,0 +1,55 @@
+import java.util.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.event.*;
+
+public class JOptionPaneEx extends JFrame{
+	JOptionPaneEx(){
+		setTitle("JOptinPane 예제");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Container c = getContentPane();
+		c.setLayout(new FlowLayout());
+		JButton jb1 = new JButton("이름입력");
+		JButton jb2 = new JButton("확인");
+		JButton jb3 = new JButton("에러 메시지");
+		JTextField tf = new JTextField(10);
+		
+		jb1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String name = JOptionPane.showInputDialog("이름  입력");
+				tf.setText(name);
+			}
+		});
+		jb2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int result = JOptionPane.showConfirmDialog(null, "계속?","Confirm",JOptionPane.YES_NO_OPTION);
+				
+				if(result ==JOptionPane.CLOSED_OPTION) {
+					tf.setText("Closed");
+				}
+				else if(result ==JOptionPane.YES_OPTION) {
+					tf.setText("Yes");
+				}
+				else
+					tf.setText("No");
+			}
+		});
+		c.add(jb1);
+		c.add(jb2);
+		c.add(jb3);
+		c.add(tf);
+		
+		jb3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null,"에러","Message",JOptionPane.ERROR_MESSAGE);
+			}
+		});
+		
+		setVisible(true);
+		setSize(500,500);
+	}
+	public static void main(String[] args) {
+		new JOptionPaneEx();
+	}
+}
